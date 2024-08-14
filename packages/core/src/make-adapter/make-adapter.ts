@@ -62,9 +62,10 @@ export function makeAdapter<DragType extends AllDragTypes>({
 		});
 	}
 
-	function registerUsage(): CleanupFn {
+	function registerUsage(container?: HTMLElement): CleanupFn {
 		function mountAdapter(): CleanupFn {
 			const api: AdapterAPI<DragType> = {
+				container,
 				canStart: lifecycle.canStart,
 				start,
 			};

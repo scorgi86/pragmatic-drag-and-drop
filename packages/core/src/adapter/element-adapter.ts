@@ -42,6 +42,9 @@ type DraggableGetFeedbackArgs = {
 };
 
 type DraggableArgs = {
+
+	container?: HTMLElement;
+
 	/** The `HTMLElement` that you want to attach draggable behaviour to.
 	 * `element` is our unique _key_ for a draggable.
 	 * `element` is a `HTMLElement` as only a `HTMLElement`
@@ -91,7 +94,7 @@ const adapter = makeAdapter<ElementDragType>({
 		 */
 		return combine(
 			honeyPotFix.bindEvents(),
-			bind(document, {
+			bind(api.container || document, {
 				type: 'dragstart',
 				listener(event: DragEvent) {
 					if (!api.canStart(event)) {

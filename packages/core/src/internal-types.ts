@@ -147,6 +147,7 @@ export type TextSelectionDragType = {
 export type AllDragTypes = ElementDragType | ExternalDragType | TextSelectionDragType;
 
 export type AdapterAPI<DragType extends AllDragTypes> = {
+	container?: HTMLElement;
 	canStart: (event: DragEvent) => boolean;
 	start: (args: { event: DragEvent; dragType: DragType }) => void;
 };
@@ -309,7 +310,7 @@ export type DropTargetEventBasePayload<DragType extends AllDragTypes> = BaseEven
  */
 export type DropTargetEventPayloadMap<DragType extends AllDragTypes> = {
 	[EventName in keyof EventPayloadMap<DragType>]: EventPayloadMap<DragType>[EventName] &
-		DropTargetLocalizedData;
+	DropTargetLocalizedData;
 } & {
 	/**
 	 * Derived from the `onDropTargetChange` event
